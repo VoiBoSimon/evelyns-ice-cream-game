@@ -44,6 +44,26 @@
       @media (orientation: portrait) {
         #rotate-prompt { display: flex; }
       }
+
+      #fullscreen-btn {
+        position: fixed;
+        bottom: 12px;
+        right: 12px;
+        z-index: 9998;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.45);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+      #fullscreen-btn:hover { opacity: 1; }
+      #fullscreen-btn svg { width: 22px; height: 22px; fill: #ffffff; }
     </style>
   </head>
   <body>
@@ -52,6 +72,35 @@
       <h2>Turn your phone sideways!</h2>
       <p>This game is best played in landscape mode.</p>
     </div>
+
+    <button id="fullscreen-btn" title="Fullscreen">
+      <svg id="fs-expand" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 3h6v2H5v4H3zm12 0h6v6h-2V5h-4zM3 15h2v4h4v2H3zm16 4h-4v2h6v-6h-2z"/>
+      </svg>
+      <svg id="fs-compress" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <path d="M5 16h3v3h2v-5H5zm3-8H5v2h5V5H8zm6 11h2v-3h3v-2h-5zm2-11V5h-2v5h5V8z"/>
+      </svg>
+    </button>
+
+    <script>
+      const btn = document.getElementById('fullscreen-btn')
+      const expand = document.getElementById('fs-expand')
+      const compress = document.getElementById('fs-compress')
+
+      btn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {})
+        } else {
+          document.exitFullscreen().catch(() => {})
+        }
+      })
+
+      document.addEventListener('fullscreenchange', () => {
+        const fs = !!document.fullscreenElement
+        expand.style.display = fs ? 'none' : 'block'
+        compress.style.display = fs ? 'block' : 'none'
+      })
+    </script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
