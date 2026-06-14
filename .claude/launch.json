@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ice-cream-game",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--force"],
+      "port": 5180
+    }
+  ]
+}

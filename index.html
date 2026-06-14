@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Evelyn's Ice Cream Van</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #fef9c3; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+      canvas { display: block; }
+
+      #rotate-prompt {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: linear-gradient(160deg, #fde68a 0%, #fbcfe8 100%);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+        padding: 32px;
+      }
+      #rotate-prompt .rotate-icon {
+        font-size: 72px;
+        animation: spin-hint 2s ease-in-out infinite;
+      }
+      #rotate-prompt h2 {
+        font-family: Arial Rounded MT Bold, Arial, sans-serif;
+        font-size: 26px;
+        color: #be185d;
+      }
+      #rotate-prompt p {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #9d174d;
+      }
+      @keyframes spin-hint {
+        0%, 100% { transform: rotate(0deg); }
+        40%       { transform: rotate(90deg); }
+        60%       { transform: rotate(90deg); }
+      }
+      @media (orientation: portrait) {
+        #rotate-prompt { display: flex; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="rotate-prompt">
+      <div class="rotate-icon">📱</div>
+      <h2>Turn your phone sideways!</h2>
+      <p>This game is best played in landscape mode.</p>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
