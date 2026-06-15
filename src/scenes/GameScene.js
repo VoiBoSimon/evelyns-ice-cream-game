@@ -29,7 +29,7 @@ const LEVEL_CONFIG = {
   2: { requireCone: true,  requireTopping: false, panelHeight: 170, title: 'Level 2', coinPerOrder: 3, timer: null },
   3: { requireCone: true,  requireTopping: true,  panelHeight: 225, title: 'Level 3', coinPerOrder: 4, timer: null },
   4: { requireCone: true,  requireTopping: true,  panelHeight: 225, title: 'Level 4', coinPerOrder: 5, timer: 15   },
-  5: { requireCone: true,  requireTopping: true,  panelHeight: 225, title: 'Level 5', coinPerOrder: 6, timer: 7    },
+  5: { requireCone: true,  requireTopping: true,  panelHeight: 225, title: 'Level 5', coinPerOrder: 6, timer: 9    },
 }
 
 const SCENE_THEMES = {
