@@ -14,6 +14,7 @@ export class CreateScene extends Phaser.Scene {
     this.score          = data?.score || 0
     this.creations      = data?.creations ? data.creations.slice() : []
     this.nextLevel      = data?.nextLevel || null
+    this.playerName     = data?.name || 'Unknown'
     this.design         = defaultDesign()
     this.coneButtons    = []
     this.toppingButtons = []
@@ -258,9 +259,9 @@ export class CreateScene extends Phaser.Scene {
     this.cameras.main.fade(220, 0, 0, 0)
     this.time.delayedCall(240, () => {
       if (this.nextLevel) {
-        this.scene.start('GameScene', { level: this.nextLevel, score: this.score, creations: this.creations })
+        this.scene.start('GameScene', { level: this.nextLevel, score: this.score, creations: this.creations, name: this.playerName })
       } else {
-        this.scene.start('GalleryScene', { mode: 'champion', creations: this.creations, score: this.score })
+        this.scene.start('GalleryScene', { mode: 'champion', creations: this.creations, score: this.score, name: this.playerName })
       }
     })
   }

@@ -70,7 +70,7 @@ export class TitleScene extends Phaser.Scene {
 
     // Play button
     this.addButton(width / 2 - 120, height * 0.5, 240, 58, '🍦  Tap to Play!', 0xec4899, 0xbe185d, () => {
-      this.scene.start('GameScene', { level: 1, score: 0 })
+      this.scene.start('NameScene')
     })
 
     // My Creations button
@@ -78,8 +78,13 @@ export class TitleScene extends Phaser.Scene {
       this.scene.start('GalleryScene', { mode: 'browse' })
     }, '16px')
 
-    // Level indicator dots
-    this.add.text(width / 2, height * 0.5 + 116, '5 levels  ·  get 5/5 to design your own ice cream', {
+    // Leaderboard button
+    this.addButton(width / 2 - 95, height * 0.5 + 112, 190, 38, '🏆  Leaderboard', 0xf59e0b, 0xb45309, () => {
+      this.scene.start('LeaderboardScene')
+    }, '16px')
+
+    // Tagline
+    this.add.text(width / 2, height * 0.5 + 162, '5 levels  ·  get 5/5 to design your own ice cream', {
       fontSize: '13px', fontFamily: 'Arial, sans-serif', color: '#be185d',
     }).setOrigin(0.5)
 

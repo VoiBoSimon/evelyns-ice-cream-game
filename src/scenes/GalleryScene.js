@@ -10,9 +10,10 @@ export class GalleryScene extends Phaser.Scene {
   constructor() { super({ key: 'GalleryScene' }) }
 
   init(data) {
-    this.mode      = data?.mode || 'browse'
-    this.creations = data?.creations || []
-    this.score     = data?.score || 0
+    this.mode        = data?.mode || 'browse'
+    this.creations   = data?.creations || []
+    this.score       = data?.score || 0
+    this.playerName  = data?.name || 'Unknown'
   }
 
   create() {
@@ -68,9 +69,21 @@ export class GalleryScene extends Phaser.Scene {
       else this.drawEmptySlot(cx, baseY)
     }
 
-    this.makeButton(width / 2 - 115, height - 42, 230, 34, '🔄  Play Again', 0xf59e0b, 0xb45309, () => {
+    // Submit score to leaderboard
+    const toppings = this.creations.reduce((sum, c) => sum + (c.toppings ? c.toppings.length : 0), 0)
+    fetch('/api/leaderboard', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: this.playerName, money: this.score, creations: this.creations.length, toppings }),
+    }).catch(() => {})
+
+    this.makeButton(width / 2 - 230, height - 42, 210, 34, '🏆  Leaderboard', 0xf59e0b, 0xb45309, () => {
       this.cameras.main.fade(200, 0, 0, 0)
-      this.time.delayedCall(220, () => this.scene.start('TitleScene'))
+      this.time.delayedCall(220, () => this.scene.start('LeaderboardScene', { playerName: this.playerName }))
+    })
+    this.makeButton(width / 2 + 20, height - 42, 210, 34, '🔄  Play Again', 0x22c55e, 0x15803d, () => {
+      this.cameras.main.fade(200, 0, 0, 0)
+      this.time.delayedCall(220, () => this.scene.start('NameScene'))
     })
   }
 

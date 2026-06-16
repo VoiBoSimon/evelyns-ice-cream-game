@@ -46,6 +46,7 @@ export class GameScene extends Phaser.Scene {
   init(data) {
     this.level              = data?.level || 1
     this.cfg                = LEVEL_CONFIG[this.level]
+    this.playerName         = data?.name || 'Unknown'
     this.selectedFlavour    = null
     this.selectedCone       = null
     this.selectedTopping    = null
@@ -870,7 +871,7 @@ export class GameScene extends Phaser.Scene {
         this.cameras.main.fade(200,0,0,0)
         this.time.delayedCall(220,()=>this.scene.start('CreateScene',{
           level:this.level, score:this.score, creations:this.creations,
-          nextLevel:hasNextLevel?nextLevel:null,
+          nextLevel:hasNextLevel?nextLevel:null, name:this.playerName,
         }))
       })
       this.addButton(width/2-60,cardY+262,120,26,'🔄 Restart',0x9ca3af,0x6b7280,()=>{
@@ -891,7 +892,7 @@ export class GameScene extends Phaser.Scene {
       }).setOrigin(0.5)
       this.addButton(width/2-115,cardY+212,230,46,`▶  Play Level ${nextLevel}`,0x22c55e,0x15803d,()=>{
         this.cameras.main.fade(200,0,0,0)
-        this.time.delayedCall(220,()=>this.scene.restart({level:nextLevel,score:this.score,creations:this.creations}))
+        this.time.delayedCall(220,()=>this.scene.restart({level:nextLevel,score:this.score,creations:this.creations,name:this.playerName}))
       })
       this.addButton(width/2-60,cardY+266,120,26,'🔄 Restart',0x9ca3af,0x6b7280,()=>{
         this.cameras.main.fade(200,0,0,0)
@@ -904,7 +905,7 @@ export class GameScene extends Phaser.Scene {
       }).setOrigin(0.5)
       this.addButton(width/2-115,cardY+210,230,48,'🏆  See your trophy room!',0xf59e0b,0xb45309,()=>{
         this.cameras.main.fade(200,0,0,0)
-        this.time.delayedCall(220,()=>this.scene.start('GalleryScene',{mode:'champion',creations:this.creations,score:this.score}))
+        this.time.delayedCall(220,()=>this.scene.start('GalleryScene',{mode:'champion',creations:this.creations,score:this.score,name:this.playerName}))
       })
     }
   }
